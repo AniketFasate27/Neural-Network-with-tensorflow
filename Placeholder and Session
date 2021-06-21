@@ -1,0 +1,24 @@
+import tensorflow.compat.v1 as tf
+import numpy as np
+tf.compat.v1.disable_eager_execution()
+mat_a = tf.constant(np.arange(1,13, dtype=np.int32), shape =[2,2,3])
+mat_b = tf.constant(np.arange(12,24, dtype=np.int32), shape =[2,3,2])
+mul_c = tf.matmul(mat_a, mat_b)
+
+with tf.compat.v1.Session() as sess:
+    runop = sess.run(mul_c)
+    sess.close()
+
+x = tf.placeholder(tf.float32, name= 'x', shape = (4,9))
+w = tf.placeholder(tf.float32, name= 'w', shape = (9,1))
+b = tf.fill((4,1), -1., name = 'bais')
+y = tf.matmul(x,w)+b
+s = tf.reduce_max(y)
+
+x_data = np.random.randn(4,9)
+w_data = np.random.randn(9,1)
+
+with tf.compat.v1.Session() as sess:
+    out_p = sess.run(s, feed_dict = {x:x_data, w:w_data})
+
+print('Output: {}'.format(out_p))
