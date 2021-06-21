@@ -1,0 +1,11 @@
+import tensorflow as tf
+import numpy as np
+
+mat_a = tf.constant(np.arange(1,13, dtype=np.int32),shape =[2,2,3])
+mat_b = tf.constant(np.arange(12,25, dtype=np.int32),shape =[2,3,2])
+mul_c = tf.matmul(mat_a, mat_b)
+
+with tf.Session() as sess:
+    runop = sess.run(mul_c)
+
+print(runop)
